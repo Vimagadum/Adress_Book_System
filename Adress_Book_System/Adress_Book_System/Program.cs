@@ -14,7 +14,7 @@ while (key != "n")
 {
     //Asking user to select one option to Add or Display
     Console.WriteLine("Select option");
-    Console.WriteLine("1-Add Contact, 2-Display Contact,3-Edit Contact");
+    Console.WriteLine("1-Add Contact, 2-Display Contact,3-Edit Contact,4-Delete Contact");
     // Creating num variable to store the use input of the option
    int num = int.Parse(Console.ReadLine());
     switch (num)
@@ -30,8 +30,11 @@ while (key != "n")
         case 3:
             addressdetails.EditContact();
             break;
+        case 4:
+            addressdetails.DeleteContact();
+            break;
     }
-    Console.WriteLine("Do you want to Add Contact Again or Edit Contact or List the Contact?? preass y/n");
+    Console.WriteLine("Do you want to Add, Edit, Delete or List the Contact?? preass y/n");
     key= Console.ReadLine();
 }
 Console.ReadLine();
