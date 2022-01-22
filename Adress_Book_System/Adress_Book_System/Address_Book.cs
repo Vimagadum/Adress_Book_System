@@ -14,6 +14,8 @@ namespace Adress_Book_System
         int zipcode;
         long mobilenumber;
 
+       
+
         //Creating a constructor ton initialize variables
         public Address_Book(string firstname, string lastname, string state, string city, string address, string email, int zipcode, long mobilenumber)
         {
@@ -27,25 +29,31 @@ namespace Adress_Book_System
             this.mobilenumber = mobilenumber;
             
         }
-
-        //Implimenting seter and geter
-        public string GetFirstName()
+        public String GetFirstName()
         {
             return firstname;
         }
-        public void SetFirstName(string firstname)
+        public void SetFirstName(string firstName)
         {
-           this.firstname = firstname;
+            this.firstname = firstName;
         }
-        public string GetLastName()
+        public String GetLastName()
         {
             return lastname;
         }
-        public void SetLastName(string lastname)
+        public void SetLastName(string lastName)
         {
-           this.lastname = lastname;
+            this.lastname = lastName;
         }
-        public string GetState()
+        public String GetCity()
+        {
+            return city;
+        }
+        public void SetCity(string city)
+        {
+            this.city = city;
+        }
+        public String GetState()
         {
             return state;
         }
@@ -53,46 +61,39 @@ namespace Adress_Book_System
         {
             this.state = state;
         }
-        public string GetCity()
-        {
-            return city;
-        }
-        public void SetCity(string city)
-        {
-           this.city = city;
-        }
-        public string GetAddress()
+        public String GetAddress()
         {
             return address;
         }
         public void SetAddress(string address)
         {
-           this.address = address;
+            this.address = address;
         }
-        public string GetEmail()
+        public String GetEmail()
         {
             return email;
         }
         public void SetEmail(string email)
         {
-           this.email = email;
+            this.email = email;
         }
-        public int GetZipCode()
+        public int GetZipcode()
         {
             return zipcode;
         }
-        public void SetZipCode(int zipcode)
+        public void SetZipcode(int zip)
         {
-           this.zipcode = zipcode;
+            this.zipcode = zipcode;
         }
-        public long GetMobileNumber()
+        public long Getmobilenumber()
         {
             return mobilenumber;
         }
-        public void SetMobileNumber(long mobilenumber)
+        public void Setmobilenumber(long mobilenumber)
         {
             this.mobilenumber = mobilenumber;
         }
+
 
         //Overrideing string method 
         public override string ToString()

@@ -34,11 +34,10 @@ namespace Adress_Book_System
 
             // storing the details in person
             Address_Book contacts = new Address_Book(firstname, lastname, state, city, address, email, zipcode, mobilenumber);
-            Console.WriteLine("Contact Added " + contacts);
-
-            //adding contacts in list
+                        //adding contacts in list
             allcontacts.Add(contacts);
             Console.WriteLine("Contact is Added");
+            view();
 
         }
 
@@ -85,12 +84,16 @@ namespace Adress_Book_System
                     eachcontact.SetEmail(email);
                     Console.WriteLine("Enter Zip Code");
                     int zipcode = int.Parse(Console.ReadLine());
-                    eachcontact.SetZipCode(zipcode);
+                    eachcontact.SetZipcode(zipcode);
                     Console.WriteLine("Enter Mobile Number");
                     long mobilenumber = Convert.ToInt64(Console.ReadLine());
-                    eachcontact.SetMobileNumber(mobilenumber);
+                    eachcontact.Setmobilenumber(mobilenumber);
                     break;
                     Console.WriteLine("Contact is updated");
+                    view();
+
+
+
                 }
                 else
                 {
@@ -120,6 +123,7 @@ namespace Adress_Book_System
                         allcontacts.Remove(eachcontact);
                         Console.WriteLine("Contact is Deleted");
                         break;
+                        view();
                     }
                     else
                     {
