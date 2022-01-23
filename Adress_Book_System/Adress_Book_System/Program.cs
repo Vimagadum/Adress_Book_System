@@ -1,43 +1,97 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using Adress_Book_System;
+using System.Collections;
 
-Console.WriteLine("WELCOME TO ADRESS BOOK SYSTEM");
-
-// Creating object of class to call the methods
-AddressDetails addressdetails = new AddressDetails();
-
-
-string key = "a";
-
-//Creating while loop to repeat the process untill the user done with his work of adding and displaying
-while (key != "n")
+namespace Adress_Book_System
 {
-    //Asking user to select one option to Add or Display
-    Console.WriteLine("Select option");
-    Console.WriteLine("1-Add Contact, 2-Display Contact,3-Edit Contact,4-Delete Contact");
-    // Creating num variable to store the use input of the option
-   int num = int.Parse(Console.ReadLine());
-    switch (num)
+    class Program
     {
-        //If the user selects for 1 the here we are calling AddDetails method to add contacts
-        case 1:
-            addressdetails.AddDetails();
-            break;
-        //If the user selects for 2 the here we are calling list method to list all contacts
-        case 2:
-            addressdetails.view();
-            break;
-        case 3:
-            addressdetails.EditContact();
-            break;
-        case 4:
-            addressdetails.DeleteContact();
-            break;
-    }
-    Console.WriteLine("Do you want to Add, Edit, Delete or List the Contact?? preass y/n");
-    key= Console.ReadLine();
-}
-Console.ReadLine();
+        //Method to perform all operation on contacts
+        public static void AddressBook(Address_Book cont)
+        {
+            bool flag = true;
+            int choice;
+            //Menu to display for the user
+            while (flag)
+            {
+               
+                    Console.WriteLine("\n1. Display All Contacts\n2. Add New Contact\n3. Edit Contact\n4. Delete Contact\n5. Exit");
+                    choice = int.Parse(Console.ReadLine());
+                    if (choice == 1)
+                    {
+                        cont.view();
+                    }
+                    else if (choice == 2)
+                    {
+                        cont.AddDetails();
+                    }
+                    else if (choice == 3)
+                    {
+                        cont.EditContact();
+                    }
+                    else if (choice == 4)
+                    {
+                        cont.DeleteContact();
+                    }
+                    else if (choice == 5)
+                    {
+                        flag = false;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid Input");
+                    }
+                
+               
+            }
+        }
+        public static void Main(string[] args)
+        {
+            AddressDetails addressDetails = new AddressDetails();
 
+            bool flag = true;
+            int choice;
+            while (flag)
+            {
+                Console.WriteLine("\n1. create New Address Book \n2. Use Existing Address Book \n3. Exit");
+                choice = int.Parse(Console.ReadLine());
+                if (choice == 1)
+                {
+                    Address_Book contact = new Address_Book();
+                    Console.WriteLine("\nEnter New Address Book Name: ");
+                    string addressBookName = Console.ReadLine();
+                    addressDetails.AddNewAddressBook(addressBookName, contact);
+                    Console.WriteLine("created " + addressBookName + "\tusing Address Book " + addressBookName);
+                    AddressBook(contact);
+
+                }
+                else if (choice == 2)
+                {
+                    Console.Write("\nEnter Address Book Name: ");
+                    string addressBookName = Console.ReadLine();
+                    Address_Book contact = addressDetails.GetAddressBook(addressBookName);
+                    if (contact != null)
+                    {
+                        Console.WriteLine("using Address Book " + addressBookName);
+                        AddressBook(contact);
+                    }
+                    else
+                    {
+                        Console.WriteLine("There is no book with name " + addressBookName);
+                    }
+
+                }
+                else if (choice == 3)
+                {
+                    flag = false;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid Input");
+                }
+            }
+        }
+    }
+}
 
 
