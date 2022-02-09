@@ -7,11 +7,10 @@ using System.Threading.Tasks;
 namespace Adress_Book_System
 {
     public class AddressDetails
-    {
-        public char y;
-        public char n;
+    {      
         //Dictonary to add address book to dictionary    
         Dictionary<string, Address_Book>  addressBookDict = new Dictionary<string, Address_Book>();
+        //method to add address book
         public void AddNewAddressBook(string addressName, Address_Book addressBook)
         {
             addressBookDict.Add(addressName, addressBook);

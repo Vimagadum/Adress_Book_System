@@ -10,21 +10,23 @@ namespace Adress_Book_System
     // Created class Address Book
     public class Address_Book
     {
+        //decclaring variabls
+        string firstName { get; set; }
+        string lastName { get; set; }
+        string city { get; set; }
+        string state { get; set; }
+        string address { get; set; }
+        string email { get; set; }
+        int zipcode { get; set; }
+        long mobilenumber { get; set; }
+
         List<Address_Book> allcontacts =  new List<Address_Book>();
-        // Declaring variables
-        string firstname, lastname, state, city, address, email;
-        int zipcode;
-        long mobilenumber;
-
-        public Address_Book()
-        {
-
-        }
+                
         //Creating a constructor ton initialize variables
         public Address_Book(string firstname, string lastname, string state, string city, string address, string email, int zipcode, long mobilenumber)
         {
-            this.firstname = firstname;
-            this.lastname = lastname;
+            this.firstName = firstname;
+            this.lastName = lastname;
             this.state = state;
             this.city = city;
             this.address = address;
@@ -32,6 +34,15 @@ namespace Adress_Book_System
             this.zipcode = zipcode;
             this.mobilenumber = mobilenumber;
             
+        }
+        public Address_Book()
+        {
+
+        }
+        //Overrideing string method 
+        public override string ToString()
+        {
+            return ("First Name: " + firstName + " Last Name: " + lastName + " City: " + city + " State: " + state + " Address" + address + " zip: " + zipcode + " Phone Number: " + mobilenumber);
         }
         //Method to add contact details
         public void AddDetails()
@@ -54,173 +65,116 @@ namespace Adress_Book_System
             Console.WriteLine("Enter Mobile Number");
             long mobilenumber = Convert.ToInt64(Console.ReadLine());
 
-            //adding the details in person
-           Address_Book contacts = new Address_Book(firstname, lastname, state, city, address, email, zipcode, mobilenumber);
+            if (CheckName(firstName, mobilenumber))
+            {
+                Console.WriteLine("contact already exists, please give another name or number");
+                AddDetails();
+            }
+            else
+            {
+                //add contact to list if does not exist already
+                Address_Book contact = new Address_Book(firstName, lastName, city, state, address, email, zipcode, mobilenumber);
+                Console.WriteLine("contact added: " + contact);
+                allcontacts.Add(contact);
+                Console.WriteLine("Contact has been added successfully");
 
-            // adding contacts in list
-            allcontacts.Add(contacts);
-            Console.WriteLine("Contact is Added");
+            }
         }
         //Writing method to Display all contacts
         public void view()
         {
-            foreach (Address_Book contactList in allcontacts)
+            if (allcontacts.Count == 0)
             {
-                Console.WriteLine(contactList);
+                Console.WriteLine("there are no contacts to display");
+            }
+            else
+            {
+                //foreach loop to iterate all contacts from list & print
+                Console.WriteLine("Displaying Contacts");
+                foreach (Address_Book contact in allcontacts)
+                {
+                    Console.WriteLine(contact);
+                }
             }
         }
 
-        //Creating method to Edit the Contact
+        // method to edit contact
         public void EditContact()
         {
-            //Taking first name as input from the user to check weather this name is existing in contact list or not
-            Console.WriteLine("Enter the First Name of your contact that which contact you wants to Edit");
-            string Fname = Console.ReadLine();
-            foreach (Address_Book eachcontact in allcontacts)
+            Console.WriteLine("Enter first Name of contact u want to edit");
+            string fName = Console.ReadLine();
+            foreach (Address_Book eachContact in allcontacts)
             {
-                //Comparing existing firts name to user entered first name
-                if (Fname == eachcontact.GetFirstName())
+                //compare if user entered firtname exist in the contact-list if it exits then let user edit contact
+                if (fName == eachContact.firstName)
                 {
-                    Console.WriteLine("Enter First Name");
-                    string firstname = Console.ReadLine();
-
-                    //Here Replacing Old contact to new details
-                    eachcontact.SetFirstName(firstname);
-
-                    Console.WriteLine("Enter Last Name");
-                    string lastname = Console.ReadLine();
-                    eachcontact.SetLastName(lastname);
-                    Console.WriteLine("Enter State name");
-                    string state = Console.ReadLine();
-                    eachcontact.SetState(state);
-                    Console.WriteLine("Enter City Name");
+                    Console.WriteLine("Enter First Name : ");
+                    string firstName = Console.ReadLine();
+                    eachContact.firstName = firstName;
+                    Console.WriteLine("Enter Last Name : ");
+                    string lastName = Console.ReadLine();
+                    eachContact.lastName = lastName;
+                    Console.WriteLine("Enter City: ");
                     string city = Console.ReadLine();
-                    eachcontact.SetCity(city);
-                    Console.WriteLine("Enter Address ");
+                    eachContact.city = city;
+                    Console.WriteLine("Enter state Name : ");
+                    string state = Console.ReadLine();
+                    eachContact.state = state;
+                    Console.WriteLine("Enter Address Name : ");
                     string address = Console.ReadLine();
-                    eachcontact.SetAddress(address);
-                    Console.WriteLine("Enter Email");
-                    string email = Console.ReadLine();
-                    eachcontact.SetEmail(email);
-                    Console.WriteLine("Enter Zip Code");
-                    int zipcode = int.Parse(Console.ReadLine());
-                    eachcontact.SetZipcode(zipcode);
-                    Console.WriteLine("Enter Mobile Number");
-                    long mobilenumber = Convert.ToInt64(Console.ReadLine());
-                    eachcontact.Setmobilenumber(mobilenumber);
+                    eachContact.address = address;
+                    Console.WriteLine("Enter zip-code : ");
+                    int zip = Convert.ToInt32(Console.ReadLine());
+                    eachContact.zipcode = zip;
+                    Console.WriteLine("Enter Phone number : ");
+                    long phoneNumber = Convert.ToInt64(Console.ReadLine());
+                    eachContact.mobilenumber = phoneNumber;
+                    Console.WriteLine("Contact has been Updated successfully");
                     break;
-                    Console.WriteLine("Contact is updated");
-                    view();
-
                 }
                 else
                 {
-                    Console.WriteLine("Invalid contact name please try again");
-
+                    Console.WriteLine("invalid contact name, Please check & try again");
+                    break;
                 }
             }
-
         }
 
-        //Creating method to Delete Contact
+        //method to delete Contact from Contact-list
         public void DeleteContact()
         {
-            //Taking first name as input from the user to check weather this name is existing in contacts list or not
-            Console.WriteLine("Enter the First Name of your contact that which contact you wants to Delete");
-            string Fname = Console.ReadLine();
-            foreach (Address_Book eachcontact in allcontacts)
+            Console.WriteLine("Enter first Name of contact u want to delete");
+            string fName = Console.ReadLine();
+            foreach (Address_Book eachContact in allcontacts)
             {
-                //Comparing existing firts name to user entered first name
-                if (Fname == eachcontact.GetFirstName())
+                //compare if user entered firtname exist in the contact-list if it exits then delete the contact object from list
+                if (fName == eachContact.firstName)
                 {
-                    Console.WriteLine("Do you really want to Delete this contact?? type y/n");
+                    Console.WriteLine("do u really want to delete this contact? Press y/n");
                     string key = Console.ReadLine();
                     if (key == "y")
                     {
-                        //Removing Contact from the allcontacts list
-                        allcontacts.Remove(eachcontact);
-                        Console.WriteLine("Contact is Deleted");
+                        allcontacts.Remove(eachContact);
+                        Console.WriteLine("contact has been deleted");
                         break;
-                        view();
-                    }
-                    else
-                    {
-                        Console.WriteLine("Contact does not exist please enter valid name");
                     }
                 }
+
+                Console.WriteLine("contact does not exist, please enter valid contact First Name");
             }
         }
-            public String GetFirstName()
+        //return true if contact already exists(check for duplicate)
+        public bool CheckName(string firstName, long phone)
         {
-            return firstname;
+            foreach (Address_Book c in allcontacts)
+            {
+                if (c.firstName.Equals(firstName) || c.mobilenumber.Equals(phone))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
-        public void SetFirstName(string firstName)
-        {
-            this.firstname = firstName;
-        }
-        public String GetLastName()
-        {
-            return lastname;
-        }
-        public void SetLastName(string lastName)
-        {
-            this.lastname = lastName;
-        }
-        public String GetCity()
-        {
-            return city;
-        }
-        public void SetCity(string city)
-        {
-            this.city = city;
-        }
-        public String GetState()
-        {
-            return state;
-        }
-        public void SetState(string state)
-        {
-            this.state = state;
-        }
-        public String GetAddress()
-        {
-            return address;
-        }
-        public void SetAddress(string address)
-        {
-            this.address = address;
-        }
-        public String GetEmail()
-        {
-            return email;
-        }
-        public void SetEmail(string email)
-        {
-            this.email = email;
-        }
-        public int GetZipcode()
-        {
-            return zipcode;
-        }
-        public void SetZipcode(int zip)
-        {
-            this.zipcode = zipcode;
-        }
-        public long Getmobilenumber()
-        {
-            return mobilenumber;
-        }
-        public void Setmobilenumber(long mobilenumber)
-        {
-            this.mobilenumber = mobilenumber;
-        }
-
-
-        //Overrideing string method 
-        public override string ToString()
-        {
-            return ("First Name: " + firstname + " Last Name: " + lastname + " City: " + city + " State: " + state + " Address" + address + " zip: " + zipcode + " Phone Number: " + mobilenumber);
-        }
-
     }
 }
+

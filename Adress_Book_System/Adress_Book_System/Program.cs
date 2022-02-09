@@ -14,7 +14,8 @@ namespace Adress_Book_System
             //Menu to display for the user
             while (flag)
             {
-               
+                try
+                {
                     Console.WriteLine("\n1. Display All Contacts\n2. Add New Contact\n3. Edit Contact\n4. Delete Contact\n5. Exit");
                     choice = int.Parse(Console.ReadLine());
                     if (choice == 1)
@@ -41,8 +42,12 @@ namespace Adress_Book_System
                     {
                         Console.WriteLine("Invalid Input");
                     }
-                
-               
+                }
+                //handling the occured exception And print to console
+                catch (Exception e)
+                {
+                    Console.WriteLine("Error: " + e.Message + "\n" + e.StackTrace);
+                }
             }
         }
         public static void Main(string[] args)
@@ -53,41 +58,49 @@ namespace Adress_Book_System
             int choice;
             while (flag)
             {
-                Console.WriteLine("\n1. create New Address Book \n2. Use Existing Address Book \n3. Exit");
-                choice = int.Parse(Console.ReadLine());
-                if (choice == 1)
+                try
                 {
-                    Address_Book contact = new Address_Book();
-                    Console.WriteLine("\nEnter New Address Book Name: ");
-                    string addressBookName = Console.ReadLine();
-                    addressDetails.AddNewAddressBook(addressBookName, contact);
-                    Console.WriteLine("created " + addressBookName + "\tusing Address Book " + addressBookName);
-                    AddressBook(contact);
-
-                }
-                else if (choice == 2)
-                {
-                    Console.Write("\nEnter Address Book Name: ");
-                    string addressBookName = Console.ReadLine();
-                    Address_Book contact = addressDetails.GetAddressBook(addressBookName);
-                    if (contact != null)
+                    Console.WriteLine("\n1. create New Address Book \n2. Use Existing Address Book \n3. Exit");
+                    choice = int.Parse(Console.ReadLine());
+                    if (choice == 1)
                     {
-                        Console.WriteLine("using Address Book " + addressBookName);
+                        Address_Book contact = new Address_Book();
+                        Console.WriteLine("\nEnter New Address Book Name: ");
+                        string addressBookName = Console.ReadLine();
+                        addressDetails.AddNewAddressBook(addressBookName, contact);
+                        Console.WriteLine("created " + addressBookName + "\tusing Address Book " + addressBookName);
                         AddressBook(contact);
+
+                    }
+                    else if (choice == 2)
+                    {
+                        Console.Write("\nEnter Address Book Name: ");
+                        string addressBookName = Console.ReadLine();
+                        Address_Book contact = addressDetails.GetAddressBook(addressBookName);
+                        if (contact != null)
+                        {
+                            Console.WriteLine("using Address Book " + addressBookName);
+                            AddressBook(contact);
+                        }
+                        else
+                        {
+                            Console.WriteLine("There is no book with name " + addressBookName);
+                        }
+
+                    }
+                    else if (choice == 3)
+                    {
+                        flag = false;
                     }
                     else
                     {
-                        Console.WriteLine("There is no book with name " + addressBookName);
+                        Console.WriteLine("Invalid Input");
                     }
-
                 }
-                else if (choice == 3)
+                // catch block to handle exception
+                catch (Exception e)
                 {
-                    flag = false;
-                }
-                else
-                {
-                    Console.WriteLine("Invalid Input");
+                    Console.WriteLine("Invalid data entered. Error: " + e.Message + "\n" + e.StackTrace);
                 }
             }
         }
