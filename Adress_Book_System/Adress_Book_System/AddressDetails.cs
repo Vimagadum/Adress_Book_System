@@ -25,5 +25,27 @@ namespace Adress_Book_System
             }
             return null;
         }
+        //search contact over multiple addressbook
+        public void searchOverMultipleAddressBook()
+        {
+            Console.WriteLine("enter city or state to search contact");
+            string cityOrstate = Console.ReadLine();
+            List<Address_Book> con = new List<Address_Book>();
+            //iterate over each addressbook to & search contact by city or state 
+            foreach (var item in addressBookDict)
+            {
+                //assign all address book matching lists to new list
+                con = item.Value.SearchContactByCityOrState(cityOrstate);
+
+            }
+            //iterate over new list & display contacts
+            if (con.Count > 0)
+            {
+                foreach (var item in con)
+                {
+                    item.view();
+                }
+            }
+        }
     }
 }

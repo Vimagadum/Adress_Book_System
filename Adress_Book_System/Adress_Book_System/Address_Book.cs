@@ -23,10 +23,10 @@ namespace Adress_Book_System
         List<Address_Book> allcontacts =  new List<Address_Book>();
                 
         //Creating a constructor ton initialize variables
-        public Address_Book(string firstname, string lastname, string state, string city, string address, string email, int zipcode, long mobilenumber)
+        public Address_Book(string firstName, string lastName, string state, string city, string address, string email, int zipcode, long mobilenumber)
         {
-            this.firstName = firstname;
-            this.lastName = lastname;
+            this.firstName = firstName;
+            this.lastName = lastName;
             this.state = state;
             this.city = city;
             this.address = address;
@@ -64,8 +64,13 @@ namespace Adress_Book_System
             int zipcode = int.Parse(Console.ReadLine());
             Console.WriteLine("Enter Mobile Number");
             long mobilenumber = Convert.ToInt64(Console.ReadLine());
+            ////add contact to list if does not exist already
+            //Address_Book contact = new Address_Book(firstname, lastname, city, state, address, email, zipcode, mobilenumber);
+            //Console.WriteLine("contact added: " + contact);
+            //allcontacts.Add(contact);
+            //Console.WriteLine("Contact has been added successfully");
 
-            if (CheckName(firstName, mobilenumber))
+            if (CheckName(firstname, mobilenumber))
             {
                 Console.WriteLine("contact already exists, please give another name or number");
                 AddDetails();
@@ -73,7 +78,7 @@ namespace Adress_Book_System
             else
             {
                 //add contact to list if does not exist already
-                Address_Book contact = new Address_Book(firstName, lastName, city, state, address, email, zipcode, mobilenumber);
+                Address_Book contact = new Address_Book(firstname, lastname, city, state, address, email, zipcode, mobilenumber);
                 Console.WriteLine("contact added: " + contact);
                 allcontacts.Add(contact);
                 Console.WriteLine("Contact has been added successfully");
@@ -163,17 +168,33 @@ namespace Adress_Book_System
                 Console.WriteLine("contact does not exist, please enter valid contact First Name");
             }
         }
-        //return true if contact already exists(check for duplicate)
-        public bool CheckName(string firstName, long phone)
+        // return true if contact already exists(check for duplicate)
+        public bool CheckName(string frstName, long phhone)
         {
             foreach (Address_Book c in allcontacts)
             {
-                if (c.firstName.Equals(firstName) || c.mobilenumber.Equals(phone))
+                if (c.firstName.Equals(frstName) || c.mobilenumber.Equals(phhone))
                 {
                     return true;
                 }
             }
             return false;
+        }
+        //serach contact by city or state
+        public List<Address_Book> SearchContactByCityOrState(string cityOrstate)
+        {
+            List<Address_Book> con = new List<Address_Book>();
+            foreach (var contact in allcontacts)
+            {
+                //check if city or state match
+                if (contact.city == cityOrstate || contact.state == cityOrstate)
+                {
+                    //adding each contact to new list if matches
+                    Console.WriteLine("Name :" + contact.firstName + " " + contact.lastName + "\nAddress :" + contact.address + "   ZipCode :" + contact.zipcode + "\nPhone No :" + contact.mobilenumber + "   email Id :" + contact.email);
+                    con.Add(contact);
+                }
+            }
+            return con;
         }
     }
 }

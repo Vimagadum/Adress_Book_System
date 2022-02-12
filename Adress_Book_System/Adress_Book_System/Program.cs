@@ -14,9 +14,10 @@ namespace Adress_Book_System
             //Menu to display for the user
             while (flag)
             {
+                //tryblock to check if any  exception occur
                 try
                 {
-                    Console.WriteLine("\n1. Display All Contacts\n2. Add New Contact\n3. Edit Contact\n4. Delete Contact\n5. Exit");
+                    Console.WriteLine("\n1. Display All Contacts\n2. Add New Contact\n3. Edit Contact\n4. Delete Contact\n5.Search contact by city or state\n6.Exit");
                     choice = int.Parse(Console.ReadLine());
                     if (choice == 1)
                     {
@@ -35,6 +36,12 @@ namespace Adress_Book_System
                         cont.DeleteContact();
                     }
                     else if (choice == 5)
+                    {
+                        Console.WriteLine("enter city or state to search contact");
+                        string cityOrstate = Console.ReadLine();
+                        cont.SearchContactByCityOrState(cityOrstate);
+                    }
+                    else if (choice == 6)
                     {
                         flag = false;
                     }
@@ -58,10 +65,12 @@ namespace Adress_Book_System
             int choice;
             while (flag)
             {
+                //Exception Handling
                 try
                 {
                     Console.WriteLine("\n1. create New Address Book \n2. Use Existing Address Book \n3. Exit");
                     choice = int.Parse(Console.ReadLine());
+                    //creating new address book
                     if (choice == 1)
                     {
                         Address_Book contact = new Address_Book();
@@ -72,6 +81,7 @@ namespace Adress_Book_System
                         AddressBook(contact);
 
                     }
+                    //using existing address book
                     else if (choice == 2)
                     {
                         Console.Write("\nEnter Address Book Name: ");
@@ -88,7 +98,11 @@ namespace Adress_Book_System
                         }
 
                     }
-                    else if (choice == 3)
+                    else if(choice == 3)
+                    {
+                        addressDetails.searchOverMultipleAddressBook();
+                    }
+                    else if (choice == 4)
                     {
                         flag = false;
                     }
