@@ -103,12 +103,24 @@ namespace Adress_Book_System
                         Console.WriteLine("enter city to search contacts by city");
                         string city = Console.ReadLine();
                         addressDetails.SetContactByCityDictionary(city);
+                        //count of contacts in each city
+                        foreach (var conByCity in addressDetails.ContactByCity)
+                        {
+                            Console.WriteLine("City :" + conByCity.Key + "   Count :" + conByCity.Value.Count);
+
+                        }
                     }
                     else if (choice == 5)
                     {
                         Console.WriteLine("enter state to search contacts by state");
                         string state = Console.ReadLine();
                         addressDetails.SetContactByStateDictionary(state);
+                        //count of contacts in each state
+                        foreach (var conByState in addressDetails.ContactByState)
+                        {
+                            Console.WriteLine("State :" + conByState.Key + "   Count :" + conByState.Value.Count);
+
+                        }
                     }
                     else if (choice == 6)
                     {

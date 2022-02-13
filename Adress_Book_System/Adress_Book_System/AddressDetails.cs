@@ -12,9 +12,9 @@ namespace Adress_Book_System
         //Dictonary to add address book to dictionary    
         Dictionary<string, Address_Book>  addressBookDict = new Dictionary<string, Address_Book>();
         public Dictionary<string, List<Address_Book>> ContactByCity;
-        Dictionary<string, List<Address_Book>> ContactByState;
-        List<string> cities;
-        List<string> states;
+        public Dictionary<string, List<Address_Book>> ContactByState;
+        public List<string> cities;
+        public List<string> states;
         List<Address_Book> con = new List<Address_Book>();
 
         public AddressDetails()
