@@ -21,7 +21,7 @@ namespace Adress_Book_System
                 //tryblock to check if any  exception occur
                 try
                 {
-                    Console.WriteLine("\n1. Display All Contacts\n2. Add New Contact\n3. Edit Contact\n4. Delete Contact\n5.sortBYCity\n6.SortByState\n7.SortByZipCode\n8.Exit");
+                    Console.WriteLine("\n1. Display All Contacts\n2. Add New Contact\n3. Edit Contact\n4. Delete Contact\n5.sortBYNmae\n6.SortByCity\n7.SortByState\n8.SortByZipCode\n9.Exit");
                     choice = int.Parse(Console.ReadLine());
                     if (choice == 1)
                     {
@@ -41,17 +41,21 @@ namespace Adress_Book_System
                     }
                     else if (choice == 5)
                     {
-                        cont.SortByCity();
+                        cont.SortByName();
                     }
                     else if (choice == 6)
                     {
-                        cont.SortByState();
+                        cont.SortByCity();
                     }
                     else if (choice == 7)
                     {
-                        cont.SortByZipCode();
+                        cont.SortByState();
                     }
                     else if (choice == 8)
+                    {
+                        cont.SortByZipCode();
+                    }
+                    else if (choice == 9)
                     {
                         flag = false;
                     }
@@ -78,7 +82,7 @@ namespace Adress_Book_System
                 //Exception Handling
                 try
                 {
-                    Console.WriteLine("\n1. Create New Address Book \n2. Use Existing Address Book   \n3. Display all Address book \n4. person by city \n5. person by state \n6. write Contacts to Text File \n7. read from text file \n8. Add In CSV\n9.Exit");
+                    Console.WriteLine("\n1. Create New Address Book \n2. Use Existing Address Book   \n3. Display all Address book \n4. person by city \n5. person by state \n6. write Contacts to Text File \n7. read from text file \n8. Add In CSV\n9.write and read in Json\n10.Exit");
                     choice = int.Parse(Console.ReadLine());
                     //creating new address book
                     if (choice == 1)
@@ -156,6 +160,10 @@ namespace Adress_Book_System
                                 Console.WriteLine("Address Book written into the file successfully!!!");
                             }
                         }
+                        else
+                        {
+                            Console.WriteLine("File doesn't exist!!!");
+                        }
                     }
                     else if (choice == 7)
                     {
@@ -194,6 +202,23 @@ namespace Adress_Book_System
                         }
                     }
                     else if (choice == 9)
+                    {
+                        Console.WriteLine("Enter the Address Book Name:");
+                        string nameJSON = Console.ReadLine();
+                        var allbooks = addressDetails.getAllAddressBook();
+                        if (allbooks.ContainsKey(nameJSON))
+                        {
+                            JsonHandler.WriteIntoJSONFile(allbooks, nameJSON);
+                            Console.WriteLine("Data inserted successfully");
+                            JsonHandler.ReadFromJSONFile();
+                            Console.WriteLine("Data read successfully");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Book Name Not Found");
+                        }
+                    }
+                    else if (choice == 10)
                     {
                         flag = false;
                     }
