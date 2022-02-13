@@ -63,12 +63,7 @@ namespace Adress_Book_System
             int zipcode = int.Parse(Console.ReadLine());
             Console.WriteLine("Enter Mobile Number");
             long mobilenumber = Convert.ToInt64(Console.ReadLine());
-            ////add contact to list if does not exist already
-            //Address_Book contact = new Address_Book(firstname, lastname, city, state, address, email, zipcode, mobilenumber);
-            //Console.WriteLine("contact added: " + contact);
-            //allcontacts.Add(contact);
-            //Console.WriteLine("Contact has been added successfully");
-
+                        
             if (CheckName(firstname, mobilenumber))
             {
                 Console.WriteLine("contact already exists, please give another name or number");
@@ -83,6 +78,7 @@ namespace Adress_Book_System
                 Console.WriteLine("Contact has been added successfully");
 
             }
+            SortByName();
         }
         //Writing method to Display all contacts
         public void view()
@@ -192,6 +188,16 @@ namespace Adress_Book_System
                 }
             }
             return con;
+        }
+        //sort by Name
+        public void SortByName()
+        {
+            allcontacts.Sort((contact1, contact2) => contact1.firstName.CompareTo(contact2.firstName));
+            foreach (Address_Book c in allcontacts)
+            {
+                Console.WriteLine(c.ToString());
+
+            }
         }
     }
 }
