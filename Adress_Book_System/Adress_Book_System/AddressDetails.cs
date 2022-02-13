@@ -74,6 +74,7 @@ namespace Adress_Book_System
                 {
                     contact.AddRange(addressBook.Value.SearchContactByCityOrState(city));
                 }
+                Address_Book.SortByName(contact);
                 if (ContactByCity.ContainsKey(c))
                 {
                     ContactByCity[c] = contact;
@@ -97,6 +98,7 @@ namespace Adress_Book_System
                 {
                     contact.AddRange(addressBook.Value.SearchContactByCityOrState(state));
                 }
+                Address_Book.SortByName(contact);
                 if (ContactByState.ContainsKey(s))
                 {
                     ContactByState[s] = contact;

@@ -19,7 +19,7 @@ namespace Adress_Book_System
         public int zipcode { get; set; }
         public long mobilenumber { get; set; }
 
-        List<Address_Book> allcontacts =  new List<Address_Book>();
+       public List<Address_Book> allcontacts =  new List<Address_Book>();
                 
         //Creating a constructor ton initialize variables
         public Address_Book(string firstName, string lastName, string state, string city, string address, string email, int zipcode, long mobilenumber)
@@ -78,7 +78,6 @@ namespace Adress_Book_System
                 Console.WriteLine("Contact has been added successfully");
 
             }
-            SortByName();
         }
         //Writing method to Display all contacts
         public void view()
@@ -95,7 +94,7 @@ namespace Adress_Book_System
                 {
                     Console.WriteLine(contact);
                 }
-            }
+            }           
         }
         // method to edit contact
         public void EditContact()
@@ -189,7 +188,7 @@ namespace Adress_Book_System
             }
             return con;
         }
-        //sort by Name
+        //sort by name default List
         public void SortByName()
         {
             allcontacts.Sort((contact1, contact2) => contact1.firstName.CompareTo(contact2.firstName));
@@ -197,6 +196,41 @@ namespace Adress_Book_System
             {
                 Console.WriteLine(c.ToString());
 
+            }
+        }
+
+        //sort by Name with paramater list
+        public static void SortByName(List<Address_Book> ContactList)
+        {
+            ContactList.Sort((contact1, contact2) => contact1.firstName.CompareTo(contact2.firstName));
+            foreach (Address_Book c in ContactList)
+            {
+                Console.WriteLine(c.ToString());
+
+            }
+        }
+        public void SortByCity()
+        {
+            allcontacts.Sort((contact1, contact2) => contact1.city.CompareTo(contact2.city));
+            foreach (Address_Book c in allcontacts)
+            {
+                Console.WriteLine(c.ToString());
+            }
+        }
+        public void SortByState()
+        {
+            allcontacts.Sort((contact1, contact2) => contact1.state.CompareTo(contact2.state));
+            foreach (Address_Book c in allcontacts)
+            {
+                Console.WriteLine(c.ToString());
+            }
+        }
+        public void SortByZipCode()
+        {
+            allcontacts.Sort((contact1, contact2) => contact1.zipcode.CompareTo(contact2.zipcode));
+            foreach (Address_Book c in allcontacts)
+            {
+                Console.WriteLine(c.ToString());
             }
         }
     }

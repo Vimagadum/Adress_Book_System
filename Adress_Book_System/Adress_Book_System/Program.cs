@@ -17,7 +17,7 @@ namespace Adress_Book_System
                 //tryblock to check if any  exception occur
                 try
                 {
-                    Console.WriteLine("\n1. Display All Contacts\n2. Add New Contact\n3. Edit Contact\n4. Delete Contact\n5.Exit");
+                    Console.WriteLine("\n1. Display All Contacts\n2. Add New Contact\n3. Edit Contact\n4. Delete Contact\n5.sortBYCity\n6.SortByState\n7.SortByZipCode\n8.Exit");
                     choice = int.Parse(Console.ReadLine());
                     if (choice == 1)
                     {
@@ -34,8 +34,20 @@ namespace Adress_Book_System
                     else if (choice == 4)
                     {
                         cont.DeleteContact();
-                    }                  
+                    }
                     else if (choice == 5)
+                    {
+                        cont.SortByCity();
+                    }
+                    else if (choice == 6)
+                    {
+                        cont.SortByState();
+                    }
+                    else if (choice == 7)
+                    {
+                        cont.SortByZipCode();
+                    }
+                    else if (choice == 8)
                     {
                         flag = false;
                     }
