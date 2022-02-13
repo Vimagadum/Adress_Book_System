@@ -6,6 +6,8 @@ namespace Adress_Book_System
 {
     class Program
     {
+        public static string filePath = @"D:\Adress_Book\Adress_Book_System\Adress_Book_System\Adress_Book_System\Contactss.txt";
+       
         //Method to perform all operation on contacts
         public static void AddressBook(Address_Book cont)
         {
@@ -74,7 +76,7 @@ namespace Adress_Book_System
                 //Exception Handling
                 try
                 {
-                    Console.WriteLine("\n1. create New Address Book \n2. Use Existing Address Book \n3. Exit");
+                    Console.WriteLine("\n1. Create New Address Book \n2. Use Existing Address Book   \n3. Display all Address book \n4. person by city \n5. person by state \n6. write Contacts to Text File \n7. read from text file \n8. Exit");
                     choice = int.Parse(Console.ReadLine());
                     //creating new address book
                     if (choice == 1)
@@ -104,11 +106,9 @@ namespace Adress_Book_System
                         }
 
                     }
-                    else if(choice == 3)
+                    else if (choice == 3)
                     {
-                        Console.WriteLine("enter city or state to search contact");
-                        string cityOrstate = Console.ReadLine();
-                        addressDetails.GetByCityOrState(cityOrstate);
+                        addressDetails.DisplayAllAddressBook();
                     }
                     else if (choice == 4)
                     {
@@ -134,7 +134,47 @@ namespace Adress_Book_System
 
                         }
                     }
+                    // writing to text file if file exists
                     else if (choice == 6)
+                    {
+                        if (File.Exists(filePath))
+                        {
+                            using (StreamWriter stw = File.CreateText(filePath))
+                            {
+                                foreach (KeyValuePair<string, Address_Book> kv in addressDetails.getAllAddressBook())
+                                {
+                                    string a = kv.Key;
+
+                                    stw.WriteLine("Address Book Name: " + a);
+                                    foreach (Address_Book c in kv.Value.getContacts())
+                                    {
+                                        stw.WriteLine(c);
+                                    }
+                                }
+                                Console.WriteLine("Address Book written into the file successfully!!!");
+                            }
+                        }
+                    }
+                    else if (choice == 7)
+                    {
+                        //reading from text file if Exists
+                        if (File.Exists(filePath))
+                        {
+                            using (StreamReader str = File.OpenText(filePath))
+                            {
+                                string s = "";
+                                while ((s = str.ReadLine()) != null)
+                                {
+                                    Console.WriteLine(s);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("File doesn't exist!!!");
+                        }
+                    }
+                    else if (choice == 8)
                     {
                         flag = false;
                     }
@@ -150,7 +190,7 @@ namespace Adress_Book_System
                 }
             }
         }
-    }
+    } 
 }
 
 

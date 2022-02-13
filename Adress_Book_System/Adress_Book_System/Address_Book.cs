@@ -78,6 +78,7 @@ namespace Adress_Book_System
                 Console.WriteLine("Contact has been added successfully");
 
             }
+            SortByName(allcontacts);
         }
         //Writing method to Display all contacts
         public void view()
@@ -95,6 +96,18 @@ namespace Adress_Book_System
                     Console.WriteLine(contact);
                 }
             }           
+        }
+        public List<Address_Book> getContacts()
+        {
+            if (allcontacts.Count == 0)
+            {
+                return null;
+            }
+            else
+            {
+                //foreach loop to iterate all contacts from list & print
+                return allcontacts;
+            }
         }
         // method to edit contact
         public void EditContact()
