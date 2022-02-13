@@ -1,4 +1,5 @@
 ﻿// See https://aka.ms/new-console-template for more information
+using AddressBookSystem;
 using Adress_Book_System;
 using System.Collections;
 
@@ -6,6 +7,7 @@ namespace Adress_Book_System
 {
     class Program
     {
+        //fileIO path
         public static string filePath = @"D:\Adress_Book\Adress_Book_System\Adress_Book_System\Adress_Book_System\Contactss.txt";
        
         //Method to perform all operation on contacts
@@ -76,7 +78,7 @@ namespace Adress_Book_System
                 //Exception Handling
                 try
                 {
-                    Console.WriteLine("\n1. Create New Address Book \n2. Use Existing Address Book   \n3. Display all Address book \n4. person by city \n5. person by state \n6. write Contacts to Text File \n7. read from text file \n8. Exit");
+                    Console.WriteLine("\n1. Create New Address Book \n2. Use Existing Address Book   \n3. Display all Address book \n4. person by city \n5. person by state \n6. write Contacts to Text File \n7. read from text file \n8. Add In CSV\n9.Exit");
                     choice = int.Parse(Console.ReadLine());
                     //creating new address book
                     if (choice == 1)
@@ -175,6 +177,23 @@ namespace Adress_Book_System
                         }
                     }
                     else if (choice == 8)
+                    {
+                        Console.WriteLine("Enter the Address Book Name:");
+                        string name = Console.ReadLine();
+                        var allbooks = addressDetails.getAllAddressBook();
+                        if (allbooks.ContainsKey(name))
+                        {
+                            CSVHandler.WriteIntoCSVFile(allbooks, name);
+                            Console.WriteLine("Data inserted successfully");
+                            CSVHandler.ReadFromCSVFile();
+                            Console.WriteLine("Data read successfully");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Book Name Not Found");
+                        }
+                    }
+                    else if (choice == 9)
                     {
                         flag = false;
                     }
