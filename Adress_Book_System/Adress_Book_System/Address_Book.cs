@@ -6,19 +6,18 @@ using System.Threading.Tasks;
 
 namespace Adress_Book_System
 {
-
     // Created class Address Book
     public class Address_Book
     {
         //decclaring variabls
-        string firstName { get; set; }
-        string lastName { get; set; }
-        string city { get; set; }
-        string state { get; set; }
-        string address { get; set; }
-        string email { get; set; }
-        int zipcode { get; set; }
-        long mobilenumber { get; set; }
+        public string firstName { get; set; }
+        public string lastName { get; set; }
+        public string city { get; set; }
+        public string state { get; set; }
+        public string address { get; set; }
+        public string email { get; set; }
+        public int zipcode { get; set; }
+        public long mobilenumber { get; set; }
 
         List<Address_Book> allcontacts =  new List<Address_Book>();
                 
@@ -102,7 +101,6 @@ namespace Adress_Book_System
                 }
             }
         }
-
         // method to edit contact
         public void EditContact()
         {
@@ -144,7 +142,6 @@ namespace Adress_Book_System
                 }
             }
         }
-
         //method to delete Contact from Contact-list
         public void DeleteContact()
         {

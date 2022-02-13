@@ -17,7 +17,7 @@ namespace Adress_Book_System
                 //tryblock to check if any  exception occur
                 try
                 {
-                    Console.WriteLine("\n1. Display All Contacts\n2. Add New Contact\n3. Edit Contact\n4. Delete Contact\n5.Search contact by city or state\n6.Exit");
+                    Console.WriteLine("\n1. Display All Contacts\n2. Add New Contact\n3. Edit Contact\n4. Delete Contact\n5.Exit");
                     choice = int.Parse(Console.ReadLine());
                     if (choice == 1)
                     {
@@ -34,14 +34,8 @@ namespace Adress_Book_System
                     else if (choice == 4)
                     {
                         cont.DeleteContact();
-                    }
+                    }                  
                     else if (choice == 5)
-                    {
-                        Console.WriteLine("enter city or state to search contact");
-                        string cityOrstate = Console.ReadLine();
-                        cont.SearchContactByCityOrState(cityOrstate);
-                    }
-                    else if (choice == 6)
                     {
                         flag = false;
                     }
@@ -100,9 +94,23 @@ namespace Adress_Book_System
                     }
                     else if(choice == 3)
                     {
-                        addressDetails.searchOverMultipleAddressBook();
+                        Console.WriteLine("enter city or state to search contact");
+                        string cityOrstate = Console.ReadLine();
+                        addressDetails.GetByCityOrState(cityOrstate);
                     }
                     else if (choice == 4)
+                    {
+                        Console.WriteLine("enter city to search contacts by city");
+                        string city = Console.ReadLine();
+                        addressDetails.SetContactByCityDictionary(city);
+                    }
+                    else if (choice == 5)
+                    {
+                        Console.WriteLine("enter state to search contacts by state");
+                        string state = Console.ReadLine();
+                        addressDetails.SetContactByStateDictionary(state);
+                    }
+                    else if (choice == 6)
                     {
                         flag = false;
                     }
