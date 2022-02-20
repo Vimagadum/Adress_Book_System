@@ -103,5 +103,29 @@ namespace Adress_Book_System
                 connection.Close();
             }
         }
+        public void AddDateField()
+        {
+            try
+            {
+                SqlConnection connection = new SqlConnection(connectionString);
+                string query = "ALTER TABLE contact ADD StartDate DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP; ";
+
+
+                SqlCommand command = new SqlCommand(query, connection);
+                connection.Open();
+
+                command.ExecuteReader();
+                Console.WriteLine("adding colum to the data base");
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
     }
 }
