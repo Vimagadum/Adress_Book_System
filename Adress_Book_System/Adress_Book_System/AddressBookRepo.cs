@@ -12,6 +12,7 @@ namespace Adress_Book_System
         public static string connectionString = @"Data Source=LAPTOP-DI3UPG04;Initial Catalog=AddressBookService;Integrated Security=True";
         public static SqlConnection connection = null;
 
+        //getting all details of person from the data base
         public ContactsModel GetAllContacts()
         {
             try
@@ -39,7 +40,7 @@ namespace Adress_Book_System
                             cdb.phone = reader.GetString(3);
                             cdb.B_Name = reader.GetString(4);
                             cdb.B_Type = reader.GetString(5);
-                            Console.WriteLine(cdb.firstname+" "+cdb.lastname+" "+cdb.city+" "+cdb.phone+" "+cdb.phone+" "+cdb.B_Name+" "+cdb.B_Type);
+                            Console.WriteLine(cdb.firstname + " " + cdb.lastname + " " + cdb.city + " " + cdb.phone + " " + cdb.phone + " " + cdb.B_Name + " " + cdb.B_Type);
                         }
                     }
                     else
@@ -60,6 +61,7 @@ namespace Adress_Book_System
                 connection.Close();
             }
         }
+        //updating contact
         public string UpdateContactToDatabase()
         {
             SqlConnection connection = null;
@@ -99,10 +101,11 @@ namespace Adress_Book_System
             }
             finally
             {
-                
+
                 connection.Close();
             }
         }
+        //adding new column to the table
         public void AddDateField()
         {
             try
@@ -127,6 +130,7 @@ namespace Adress_Book_System
                 connection.Close();
             }
         }
+        //retrive data from the data base based on city or state
         public void RetrieveByCityOrState()
         {
             try
@@ -159,6 +163,46 @@ namespace Adress_Book_System
                     Console.WriteLine("No contacts match the City or State");
                 }
                 reader.Close();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+        //Adding New contact to the data base
+        public void  AddNewContact()
+        {
+            try
+            {
+                ContactsModel cdb = new ContactsModel();
+                SqlConnection connection = new SqlConnection(connectionString);
+                string query = "Insert INTO contact(first_name, last_name, address, city, state, zip, phone_no, email, book_id) VALUES('Krish', 'Rao', 'mahadevpura','banglore', 'Karnatak', 591214, '2354618520', 'krish@gmail.com', 'BK3');" +
+                    "select * from contact where first_name = 'Krish';";
+
+
+                SqlCommand command = new SqlCommand(query, connection);
+                connection.Open();
+
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    while(reader.Read())
+                    {
+                        string first_name = reader.GetString(0);
+                        Console.WriteLine("Fisrt Name "+ first_name);
+                    }
+                    Console.WriteLine("Contact is added");
+                }
+                else
+                {
+                    Console.WriteLine("contact adding failed");
+                }
+                reader.Close();
 
             }
             catch (Exception e)
@@ -172,3 +216,5 @@ namespace Adress_Book_System
         }
     }
 }
+    
+
