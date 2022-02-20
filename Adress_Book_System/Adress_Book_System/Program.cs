@@ -73,6 +73,8 @@ namespace Adress_Book_System
         }
         public static void Main(string[] args)
         {
+            AddressBookRepo repo = new AddressBookRepo();
+            repo.GetAllContacts();
             AddressDetails addressDetails = new AddressDetails();
 
             bool flag = true;
@@ -82,7 +84,7 @@ namespace Adress_Book_System
                 //Exception Handling
                 try
                 {
-                    Console.WriteLine("\n1. Create New Address Book \n2. Use Existing Address Book   \n3. Display all Address book \n4. person by city \n5. person by state \n6. write Contacts to Text File \n7. read from text file \n8. Add In CSV\n9.write and read in Json\n10.Exit");
+                    Console.WriteLine("\n1. Create New Address Book \n2. Use Existing Address Book   \n3. Display all Address book \n4. person by city \n5. person by state \n6. write Contacts to Text File \n7. read from text file \n8. Add In CSV\n9.write and read in Json\n10.GetAllContactsFromDataBase\n11. Exit");
                     choice = int.Parse(Console.ReadLine());
                     //creating new address book
                     if (choice == 1)
@@ -218,7 +220,13 @@ namespace Adress_Book_System
                             Console.WriteLine("Book Name Not Found");
                         }
                     }
-                    else if (choice == 10)
+                    
+                    else if(choice == 10)
+                    {
+                        AddressBookRepo ad = new AddressBookRepo();
+                        ad.GetAllContacts();
+                    }
+                    else if (choice == 11)
                     {
                         flag = false;
                     }
