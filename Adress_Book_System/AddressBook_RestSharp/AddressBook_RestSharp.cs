@@ -41,7 +41,7 @@ namespace AddressBook_RestSharp
         }
 
         [TestMethod]
-        public void OnCallingGETApi_ReturnAddressList()
+        public void GetAllDataFromJson()
         {
             RestResponse response = GetAddressList();
 
@@ -51,7 +51,7 @@ namespace AddressBook_RestSharp
             Assert.AreEqual(1, dataResponse.Count);
         }
         [TestMethod]
-        public void GivenAddressBook_DoPost_ShouldReturnAddedAddressDetails()
+        public void AddInJson()
         {
             // arrange
             RestRequest request = new RestRequest("/AddressBook", Method.Post);
@@ -86,7 +86,7 @@ namespace AddressBook_RestSharp
             Assert.AreEqual("mac@gmail.com", dataResponse.email);
         }
         [TestMethod]
-        public void GivenAddressBook_OnPut_ShouldReturnUpdatedAddressDetails()
+        public void UpdateInJson()
         {
             // arrange
             RestRequest request = new RestRequest("/AddressBook/2", Method.Put);
@@ -112,6 +112,18 @@ namespace AddressBook_RestSharp
             Contacts dataResponse = JsonConvert.DeserializeObject<Contacts>(response.Content);
             Assert.AreEqual("rohit", dataResponse.firstName);
             Assert.AreEqual("rohit@musk.com", dataResponse.email);
+        }
+        [TestMethod]
+        public void DeleteFromJson()
+        {
+            // arrange
+            RestRequest request = new RestRequest("/AddressBook/4", Method.Delete);
+
+            // act
+            RestResponse response = client.ExecuteAsync(request).Result;
+
+            // assert
+            Assert.AreEqual(response.StatusCode, HttpStatusCode.OK);
         }
     }
 }
