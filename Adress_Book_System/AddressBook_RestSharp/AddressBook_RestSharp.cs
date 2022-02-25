@@ -50,5 +50,40 @@ namespace AddressBook_RestSharp
             List<AddressBook_RestSharp> dataResponse = JsonConvert.DeserializeObject<List<AddressBook_RestSharp>>(response.Content);
             Assert.AreEqual(1, dataResponse.Count);
         }
+        [TestMethod]
+        public void GivenAddressBook_DoPost_ShouldReturnAddedAddressDetails()
+        {
+            // arrange
+            RestRequest request = new RestRequest("/AddressBook", Method.Post);
+            request.AddHeader("Content-type", "application/json");
+            request.AddJsonBody(
+            new
+            {
+
+                firstname = "mac",
+                lastname = "pillar",
+                address = "chennai",
+                city = "chennai",
+                state = "TamilNadu",
+                zip = "521654",
+                phone = "987654321",
+                email = "mac@gmail.com"
+
+            });
+            // act
+            RestResponse response = client.ExecuteAsync(request).Result;
+
+            // assert
+            Assert.AreEqual(response.StatusCode, HttpStatusCode.Created);
+            Contacts dataResponse = JsonConvert.DeserializeObject<Contacts>(response.Content);
+            Assert.AreEqual("mac", dataResponse.firstName);
+            Assert.AreEqual("pillar", dataResponse.lastName);
+            Assert.AreEqual("chennai", dataResponse.address);
+            Assert.AreEqual("chennai", dataResponse.city);
+            Assert.AreEqual("TamilNadu", dataResponse.state);
+            Assert.AreEqual("521654", dataResponse.zipCode);
+            Assert.AreEqual("987654321", dataResponse.phoneNumber);
+            Assert.AreEqual("mac@gmail.com", dataResponse.email);
+        }
     }
 }
