@@ -85,5 +85,33 @@ namespace AddressBook_RestSharp
             Assert.AreEqual("987654321", dataResponse.phoneNumber);
             Assert.AreEqual("mac@gmail.com", dataResponse.email);
         }
+        [TestMethod]
+        public void GivenAddressBook_OnPut_ShouldReturnUpdatedAddressDetails()
+        {
+            // arrange
+            RestRequest request = new RestRequest("/AddressBook/2", Method.Put);
+            request.AddHeader("Content-type", "application/json");
+            request.AddJsonBody(
+            new
+            {
+                firstname = "rohit",
+                lastname = "king",
+                address = "mumbai",
+                city = "mumbai",
+                state = "maharashtra",
+                zip = 567289,
+                phone = 9988776655,
+                email = "rohit@musk.com"
+
+            });
+            // act
+            RestResponse response = client.ExecuteAsync(request).Result;
+
+            // assert
+            Assert.AreEqual(response.StatusCode, HttpStatusCode.OK);
+            Contacts dataResponse = JsonConvert.DeserializeObject<Contacts>(response.Content);
+            Assert.AreEqual("rohit", dataResponse.firstName);
+            Assert.AreEqual("rohit@musk.com", dataResponse.email);
+        }
     }
 }
